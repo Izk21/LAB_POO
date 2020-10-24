@@ -1,0 +1,149 @@
+///nota pentru cititor: timpul de rulare este destul de mare iar la final apar erori in main, erori type si erori de operatori (nu am mai tinut pasul la ultima parte).
+#include <iostream>
+#include <string.h>
+#include <bits/stdc++.h>
+using namespace std;
+
+class Student{
+// private, protected, public;
+    private:
+        const int ID_Matricol;
+        int varsta;
+        char* nume;
+        int nrNote;
+        int* note;
+
+    public:
+        static int anCurent;
+        static void mesaj(){
+        cout<<"bine ati venit studenti de anul "<<anCurent<<endl;
+        //cout<<"bine ati venit studenti de anul "<<this->nrNote;
+        }
+
+        Student():ID_Matricol(00000){                      //constructor fara parametrii
+            this->varsta=0;
+            this->nume=new char[strlen("Anonim")+1];       //aloc zona de memorie de 7 caractere
+            strcpy(this->nume,"Anonim");                   //copiaza in this->nume stringul Anonim. Pe atributul nume are Anonim
+
+        }
+
+        Student(int varsta,char* nume, int nrNote, int* note):ID_Matricol(1){        //sau int varsta1 ...
+                                                                                     //                   varsta=varsta1
+            this->varsta=varsta;
+            this->nume=new char[strlen(nume)+1];
+            strcpy(this->nume,nume);
+
+            this->nrNote=nrNote;
+
+            this->note = new int[nrNote];
+            for(int i=0;i<nrNote;i++)
+                this->note[i]=note[i];
+
+        }
+
+    void afisare(){
+        cout<<"Student "<<this->nume<<" are urmatoarele note: ";
+        for(int i=0;i<this->nrNote;i++)
+            cout<<this->note[i]<<" ";
+    }
+
+//getters
+    int getNrNote(){
+        return this->nrNote;
+    }
+
+    char* getNume(){                       //am nevoie de un pointer, get returneaza pointer catre zona de adresa a lui nume
+        return this->nume;
+    }
+
+    int* getNote(){
+        return this->note;
+    }
+    int getVarsta(){
+        return this->varsta;
+    }
+//setters
+    void setVarsta(int a){
+        this->varsta=a;
+    }
+    void setNume(char* a){
+        if(this->nume!=nullptr)
+            delete[] this->nume;
+
+        this->nume= new char[strlen(a)+1];
+        strcpy(this->nume,a);
+    }
+    void setNote(int* a,int b){           //b-nr de note
+        if(this->note!=nullptr)
+            delete[] this->note;
+
+        this->nrNote=b;
+        this->note=new int[b];
+
+        for(int i=0;i<b;i++)
+            this->note[i]=a[i];
+    }
+//metoda
+    float medieStudent(){
+        float medie_note;
+        for(int i=0;i<this->nrNote;i++)
+            medie_note=medie_note+this->note[i];
+        medie_note=medie_note/this->nrNote;
+
+        return medie_note;
+    }
+
+    ~Student(){                          //destructor
+        if(this->note!=nullptr)
+            delete[] this->note;
+        if(this->nume!=nullptr)
+            delete[] this->nume;
+
+    }
+
+};
+
+int Student::anCurent=2;                 //declarare globala
+
+int main()
+{                                            //get da datele, post aduce datele
+/*
+    cout<<Student::anCurent;
+    Student::mesaj();
+*/
+
+    Student s;
+
+    char nume[]={"POO"};
+    char nume2[]={"POO2"};
+    int note2[]={5,6,7,8};
+
+    Student s2(3,nume,4,note2);
+    s2.afisare();
+
+    cout<<s2.getNume();
+    cout<<endl;
+    s2.setNume[nume2];
+    cout<<s2.getNume()<<endl;
+
+    int* note=s2.getNote()<<endl;
+    for(int i=0;i<s2.getNrNote();i++)
+        cout<<*(note+i)<<" "<<endl;
+
+    cout<<s2.getVarsta();
+    cout<<endl;
+    s2.setVarsta(24);
+    cout<<s2.getVarsta();
+    cout<<"------------------------------------------\n";
+    int* note2=s2.getNote();
+    for(int i=0;i<s2.getNote();i++)
+        cout<<*(note2+i)<<" "<<endl;
+
+    s2.setNote(note2,4);
+
+    int* note3=s2.getNote();
+    for(int i=0;i<s2.getNrNote();i++)
+        cout<<*(note3+i)<<" ";
+
+    return 0;
+}
