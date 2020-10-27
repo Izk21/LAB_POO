@@ -1,8 +1,4 @@
-///nota pentru cititor: timpul de rulare este destul de mare iar la final apar erori in main, erori type si erori de operatori (nu am mai tinut pasul la ultima parte).
-#include <iostream>
-#include <string.h>
-
-//#include <bits/stdc++.h>
+#include <bits/stdc++.h>             
 using namespace std;
 
 class Student{
