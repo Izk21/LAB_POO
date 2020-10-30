@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>             
+#include <iostream>
+#include <string.h>
+
+//#include <bits/stdc++.h>
 using namespace std;
 
 class Student{
@@ -17,9 +20,9 @@ class Student{
         //cout<<"bine ati venit studenti de anul "<<this->nrNote;
         }
 
-        Student():ID_Matricol(00000){                        //constructor fara parametrii
+        Student():ID_Matricol(00000){                      //constructor fara parametrii
             varsta=0;
-            nume=new char[strlen("Anonim")+1];              //aloc zona de memorie de 7 caractere
+            nume=new char[strlen("Anonim")+1];       //aloc zona de memorie de 7 caractere
             strcpy(this->nume,"Anonim");                   //copiaza in this->nume stringul Anonim. Pe atributul nume are Anonim
 
         }
@@ -106,14 +109,14 @@ class Student{
 
 };
 
-int Student::anCurent=2;                      //declarare globala
+int Student::anCurent=2;                 //declarare globala
 
 int main()
 {                                            //get da datele, post aduce datele
 /*
-    cout<<Student::anCurent;
+    cout<<Student::anCurent;*/
     Student::mesaj();
-*/
+
 
     Student s;
 
@@ -128,25 +131,27 @@ int main()
 
     cout<<s2.getNume()<<endl;
     s2.setNume(nume2);
-    cout<<s2.getNume()<<endl;
+    s2.setVarsta(24);
+    s2.setNote(pinguin2,5);
+    //cout<<s2.getNume()<<endl;
     cout<<"------------------------------------------\n";
 /*
     int* note=s2.getNote();
-    for(int i=0;i<s2.getNrNote();i++)                        //le mai afisam o data mai  jos
+    for(int i=0;i<s2.getNrNote();i++)                       //le mai afisam o data mai  jos
         cout<<*(note+i)<<" ";
         cout<<endl;
     cout<<"------------------------------------------\n";
 */
     cout<<s2.getVarsta()<<endl;
-    s2.setVarsta(24);
-    cout<<s2.getVarsta()<<endl;
+
+    //cout<<s2.getVarsta()<<endl;
     cout<<"------------------------------------------\n";
     int* note2=s2.getNote();
     for(int i=0;i<s2.getNrNote();i++)
         cout<<*(note2+i)<<" "<<endl;
 
     cout<<endl<<endl;
-    s2.setNote(pinguin2,5);
+
 
     int* note3=s2.getNote();
     for(int i=0;i<s2.getNrNote();i++)
