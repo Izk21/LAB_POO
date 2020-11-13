@@ -1,0 +1,124 @@
+///eroare getCNP
+#include <iostream>
+
+using namespace std;
+
+class Persoana{
+private:
+    string nume;
+    string CNP;
+    float inaltime;
+public:
+    string getNume(){
+        return nume;
+        }
+    string getCNP(){
+        return getCNP;
+        }
+
+        Persoana(){
+            this->nume="Anonim";
+            this->CNP="Necunoscut";
+            this->inaltime=0;
+            }
+        Persoana(string nume,string CNP, float inaltime){
+            this->nume=nume;
+            this->CNP=CNP;
+            this->inaltime=inaltime;
+            }
+        Persoana(const Persoana& p){
+            this->nume=p.nume;
+            this->CNP=p.CNP;
+            this->inaltime=p.inaltime;
+        }
+        Persoana& operator=(const Persoana& p){
+            if(this!=&p){
+                this->nume=p.nume;
+                this->CNP=p.CNP;
+                this->inaltime=p.inaltime;}
+            return *this;
+            }
+
+        bool operator <(const Persoana& p1){
+            if(this->inaltime<p1.inaltime)
+                return true;
+            return false;
+            }
+
+};
+
+class Student:public Persoana{
+private:
+    string facultate;
+    bool buget;
+    int nr_note;
+    int* note;
+public:
+    Student():Persoana(){
+        this->facultate="Anonima";
+        this->nr_note=0;
+        this->note=new int[nr_note];
+        for(int i=0;i<nr_note;i++)
+            this->note[i]=note[i];}
+    Student(Persoana p1,string nume, string CNP, float inaltime, string facultate,bool buget, int nr_note, int* note):Persoana(nume, CNP, inaltime){
+        this->facultate=facultate;
+        this->buget=buget;
+        this->nr_note=nr_note;
+        this->note=new int[nr_note];
+        for(int i=0;i<nr_note;i++)
+            this->note[i]=note[i];}
+    Student(Persoana p1, string facultate, bool buget, int nr_note, int* note):Persoana(p1){
+        this->facultate=facultate;
+        this->buget=buget;
+        this->nr_note=nr_note;
+        this->note=new int[nr_note];
+        for(int i=0;i<nr_note;i++)
+            this->note[i]=note[i];}
+    Student(const Student& s):Persoana(s){
+        this->facultate=s.facultate;
+        this->buget=s.buget;
+        this->nr_note=s.nr_note;
+        this->note=new int[nr_note];
+        for(int i=0;i<nr_note;i++)
+            this->note[i]=s.note[i];
+        }
+    Student& operator =(const Student& s){
+        if(this!=&s){
+            Persoana::operator=(s);
+            this->facultate=s.facultate;
+            this->buget=s.buget;
+            this->nr_note=s.nr_note;
+            this->note=new int[nr_note];
+            for(int i=0;i<this->nr_note;i++)
+                this->note[i]=s.note[i];
+            }
+        return *this;
+        }
+    bool operator<(const Student& s){
+        float medies1=0,medies2=0;
+        for(int i=0;i<this->nr_note;i++)
+            medies1+=this->note[i];
+        medies1/=this->nr_note;
+        for(int i=0;i<s.nr_note;i++)
+            medies2+=s.note[i];
+        medies2/=s.nr_note;
+    if(medies1<medies2)
+    {return true;}
+    else {return false;}
+        }
+    };
+
+int main()
+{
+ Persoana p1("Ana","334342234",1.70);
+ Persoana p2("Maria","78787878",1.65);
+
+ int Note1={7,8,9};
+ int Note2={5,5,6};
+
+ Student s1(p1,"fmi",true,3,Note1);
+ Student s2(p2,"upb",false,3,Note2);
+
+
+    return 0;
+}
