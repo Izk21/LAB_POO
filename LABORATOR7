@@ -1,4 +1,9 @@
-///eroare getCNP
+/*||=== Build: Debug in lab7 (compiler: GNU GCC Compiler) ===|
+C:\Users\Izabela\Desktop\izu\M-I_ANII\POO\Laborator\lab7\main.cpp||In function 'int main()':|
+C:\Users\Izabela\Desktop\izu\M-I_ANII\POO\Laborator\lab7\main.cpp|115|error: scalar object 'Note1' requires one element in initializer|
+C:\Users\Izabela\Desktop\izu\M-I_ANII\POO\Laborator\lab7\main.cpp|116|error: scalar object 'Note2' requires one element in initializer|
+||=== Build failed: 2 error(s), 0 warning(s) (0 minute(s), 0 second(s)) ===|
+*/
 #include <iostream>
 
 using namespace std;
@@ -13,7 +18,7 @@ public:
         return nume;
         }
     string getCNP(){
-        return getCNP;
+        return CNP;
         }
 
         Persoana(){
