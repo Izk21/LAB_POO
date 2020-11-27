@@ -1,0 +1,139 @@
+///1DECEMBRIE
+#include <iostream>
+
+using namespace std;
+
+/*class Persoana
+{public:
+	Persoana() {}
+	friend ostream& operator<<(ostream &out, const Persoana &b)
+	{return b.Afisare(out);}
+	virtual ostream& Afisare(ostream& out) const
+	{out << "Persoana"; return out;}};                                         ///idei princ lab
+class Student : public Persoana
+{public:
+	Student() {}
+	virtual ostream& Afisare(ostream& out) const override
+	{out << "Student "; return out;}};
+int main()
+{Persoana a; Student b; Persoana &a1=b; cout<<a; cout<<" "; cout<<a1; return 0;}*/
+
+class Automobil{
+private:                                                              ///clasa abstrac
+    string marca;
+    string model;
+    bool folosit;
+    int tonaj;
+    int razaActiune;
+public:
+    Automobil(){
+        this->marca="inexistenta";
+        this->model="inexistent";
+        this->folosit=0;
+        this->tonaj=0;
+        this->razaActiune=0;
+    }
+    Automobil(string marca, string model, bool folosit, int tonaj, int razaActiune){
+        this->marca=marca;
+        this->model=model;
+        this->folosit=folosit;
+        this->tonaj=tonaj;
+        this->razaActiune=razaActiune;
+    }
+    Automobil& operator=(const Automobil& am){
+        if(this!=&am){
+            this->marca=am.marca;
+            this->model=am.model;
+            this->folosit=am.folosit;
+            this->tonaj=am.tonaj;
+            this->razaActiune=am.razaActiune;
+        }
+        return *this;
+    }
+    virtual void afisare(){
+        cout<<"Marca: "<<this->marca<<"\nModel: "<<this->model<<"\nFolosit: "<<this->folosit<<"\nTonaj: "<<this->tonaj<<"\nRaza de actiune: "<<this->razaActiune<<endl;
+    }
+};
+
+class MasiniUndercover:public Automobil{
+private:
+    int viteza;
+    int indiceProtectieArmura;    //la cate "gloante" rezista
+public:
+    MasiniUndercover():Automobil(){
+        this->viteza=0;
+        this->indiceProtectieArmura=0;
+    }
+    void afisare(){
+        Automobil::afisare();
+        cout<<viteza<<endl;
+        cout<<indiceProtectieArmura<<endl;
+    }
+};
+
+class MasiniInterventie:public Automobil{
+private:
+    int nrPersTransportate;
+    bool dotate;
+public:
+    MasiniInterventie():Automobil(){
+        this->nrPersTransportate=0;
+        this->dotate=0;
+    }
+    void afisare(){
+        Automobil::afisare();
+        cout<<nrPersTransportate<<endl;
+        cout<<dotate<<endl;
+    }
+};
+
+class MasiniEmisieReceptie:public Automobil{
+private:
+    int distInterSemnAcustic;
+    int distInterSemnVideo;
+public:
+    MasiniEmisieReceptie():Automobil(){
+        this->distInterSemnAcustic=0;
+        this->distInterSemnVideo=0;
+    }
+    void afisare(){
+        Automobil::afisare();
+        cout<<distInterSemnAcustic<<endl;
+        cout<<distInterSemnVideo<<endl;
+    }
+};
+
+class ListaAutomobile{
+public:
+    Automobil **listaAuto;
+    int i=0;
+
+    ListaAutomobile& operator+(Automobil am){
+        listaAuto[i]=&am;                           ///suprainc op+
+        i++;
+
+    return *this;
+    }
+
+};
+
+int main(){
+ListaAutomobile a;
+
+MasiniUndercover m;
+
+MasiniInterventie m1;
+
+MasiniEmisieReceptie m2;
+
+int k=0;                      ///k-kontor (:
+a=a+ m; k++;                  ///adaug in lista
+a=a+m1; k++;
+a=a+m2; k++;
+
+
+for(int i=0; i<k; i++)
+    a.listaAuto[i]->afisare();          ///afisez elem din lsita
+
+return 0;
+}
