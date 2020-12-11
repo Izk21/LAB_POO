@@ -1,0 +1,57 @@
+#include <iostream>
+
+
+using namespace std;
+
+
+class Persoana
+{
+public:
+	Persoana() {}
+
+	friend ostream& operator<<(ostream &out, const Persoana &b)
+	{
+
+		return b.Afisare(out);
+	}
+
+
+	virtual ostream& Afisare(ostream& out) const
+	{
+		out << "Persoana";
+		return out;
+	}
+};
+
+class Student : public Persoana
+{
+public:
+	Student() {}
+
+
+	virtual ostream& Afisare(ostream& out) const override
+	{
+		out << "Student ";
+		return out;
+	}
+};
+
+
+
+
+int main()
+{
+    Persoana a;
+    Student b;
+
+    Persoana &a1=b;
+
+    cout<<a;
+    cout<<" ";
+    cout<<a1;
+
+    return 0;
+}
+
+
+
