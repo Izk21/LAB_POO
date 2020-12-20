@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Decoratiune{
+private:
+    string nume;
+    string culoare;
+    int pret;
+    bool reciclabila;
+public:
+    Decoratiune(){
+    this->nume="necunoscuta";
+    this->culoare="necunoscuta";
+    this->pret=0;
+    this->reciclabila=0;
+    }
+
+    Decoratiune(string nume,string culoare,int pret,bool reciclabila){
+        this->nume=nume;
+        this->culoare=culoare;
+        this->pret=pret;
+        this->reciclabila=reciclabila;
+    }
+
+    Decoratiune& operator=(const Decoratiune& de){
+        if(this!=&de){
+        this->nume=de.nume;
+        this->culoare=de.culoare;
+        this->pret=de.pret;
+        this->reciclabila=de.reciclabila;}
+    return *this;
+    }
+
+    int pretTotal() const{
+        int pretTotal=0;
+        pretTotal=pretTotal+this->pret;
+    return pretTotal;
+    }
+
+    friend istream& operator>>(istream& in, Decoratiune& de){
+        cout<<"nume"; in>>de.nume;
+        in>>de.culoare;
+        in>>de.pret;
+        in>>de.reciclabila;
+    return in;
+    }
+
+    friend ostream& operator<<(ostream& out, const Decoratiune& de){
+        out<<de.nume<<endl;
+        out<<de.culoare<<endl;
+        out<<de.pret<<endl;
+        out<<de.reciclabila<<endl;
+    return out;
+    }
+
+    virtual void afisare(){
+        cout<<"Nume: "<<this->nume<<"\nCuloare: "<<this->culoare<<"\nPret: "<<this->pret<<"\nReciclabil: "<<this->reciclabila;
+        cout<<"pret total:"<<pretTotal();
+    }
+};
+
+class ListaProduse{
+public:
+    Decoratiune **listaProd;
+    int i=0;
+
+    ListaProduse& operator+(Decoratiune de){
+        listaProd[i]=&de;
+        i++;
+    return *this;
+    }
+};
+
+int main(){
+Decoratiune a;
+ListaProduse b;
+cin>>a;
+b=b+a;
+
+int k=1;
+//int k=0;
+//b=b+a1; k++;
+//for(int i=0;i<k;i++)
+    //Decoratiune::afisare(b&);
+cout<<b[1];
+cout<<b[1].pret;
+cout<<Decoratiune::pretTotal;
+return 0;
+}
