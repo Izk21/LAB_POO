@@ -205,7 +205,7 @@ private:
 public:
     string getVaccinComandat(){ return vaccinComandat;}
     int getCantitate(){ return cantitate; }
-    
+
         comanda(string data, string numeClient, string vaccinComandat, int cantitate, bool onorata):id(000){
         this->data=data;
         this->numeClient=numeClient;
@@ -214,7 +214,7 @@ public:
         this->onorata=onorata;
     }
 
-    comanda(const comanda &c){
+    comanda(const comanda& c){
         this->data=c.data;
         this->numeClient=c.numeClient;
         this->vaccinComandat=c.vaccinComandat;
