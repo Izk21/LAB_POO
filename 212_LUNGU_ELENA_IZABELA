@@ -1,0 +1,279 @@
+/*Lungu Elena Izabela
+CodeBlocks 20.03 GNU GCC Compiler
+Eduard Szmeteanca*/
+
+#include <bits/stdc++.h>
+#include <iostream>
+#include <string.h>
+#include <list>
+
+using namespace std;
+
+class vaccin{
+private:
+    int pret;
+    int temperaturaDepozitare;
+    int nrSubstanteComponente;
+    int* substantaComponenta;
+public:
+    vaccin(){       //constructor de initializare
+        pret=0;
+        temperaturaDepozitare=0;
+        nrSubstanteComponente=0;
+        substantaComponenta=new int[0];
+        }
+
+    vaccin(int pret,int temperaturaDepozitare, int nrSubstanteComponente, int* substantaComponenta){
+        this->pret=pret;
+        this->temperaturaDepozitare=temperaturaDepozitare;
+        this->nrSubstanteComponente=0;
+        this->substantaComponenta=new int[nrSubstanteComponente];
+        for(int i=0;i<nrSubstanteComponente;i++)
+            this->substantaComponenta[i]=substantaComponenta[i];
+    }
+
+    vaccin(const vaccin& v){
+        this->pret=v.pret;
+        this->temperaturaDepozitare=v.temperaturaDepozitare;
+        this->nrSubstanteComponente=v.nrSubstanteComponente;
+        this->substantaComponenta=new int[nrSubstanteComponente];
+        for(int i=0;i<this->nrSubstanteComponente;i++)
+            this->substantaComponenta[i]=v.substantaComponenta[i];
+    }
+
+    vaccin& operator=(const vaccin& v){
+        if(this!=&v){
+        this->pret=v.pret;
+        this->temperaturaDepozitare=v.temperaturaDepozitare;
+        this->nrSubstanteComponente=v.nrSubstanteComponente;
+        this->substantaComponenta=new int[nrSubstanteComponente];
+        for(int i=0;i<this->nrSubstanteComponente;i++)
+            this->substantaComponenta[i]=v.substantaComponenta[i];}
+        return *this;
+    }
+
+    friend ostream& operator<<(ostream &out, const vaccin& v){
+        out<< v.pret; //etc
+        out<< v.temperaturaDepozitare;
+        out<< v.nrSubstanteComponente;
+        for(int i=0;i<v.nrSubstanteComponente;i++)
+            out<< v.substantaComponenta[i];
+        return out;
+    }
+
+    friend istream& operator>>(istream &in, vaccin &v){
+        cout<<"\n Introduceti pretul: ";
+        in>>v.pret;
+        cout<<"\n Introduceti temparatura de depozitare: ";
+        in>>v.temperaturaDepozitare;
+        cout<<"\n Introduceti numarul de substante componente: ";
+        in>>v.nrSubstanteComponente;
+        cout<<"\n Introduceti substantele componente: ";
+        for(int i=0;i<v.nrSubstanteComponente;i++)
+            in>>v.substantaComponenta[i];
+     return in; }
+
+~vaccin(){
+  if(this->substantaComponenta!=nullptr)
+    delete[] this->substantaComponenta; }
+};
+
+class antiGripal:public vaccin{
+private:
+    string administrare;
+    bool respectareOMS;
+public:
+    antiGripal(string administrare,bool respectareOMS){
+        this->administrare=administrare;
+        this->respectareOMS=respectareOMS;
+    }
+
+    antiGripal(const antiGripal& a){
+    this->administrare=a.administrare;
+    this->respectareOMS=a.respectareOMS;
+    }
+
+    antiGripal& operator=(const antiGripal& a){
+        if(this!=&a){
+    this->administrare=a.administrare;
+    this->respectareOMS=a.respectareOMS; }
+    return *this;}
+
+    friend ostream& operator<<(ostream &out, const antiGripal& a){
+        out<<a.administrare;
+        out<<a.respectareOMS;
+        return out;}
+
+    friend istream& operator>>(istream &in, antiGripal&a){
+        cout<<"\n Introduceti tulpina pentru care se administreaza: ";
+        in>>a.administrare;
+        cout<<"\n Se respecta normele OMS? [0-da, 1-nu]";
+        in>>a.respectareOMS;
+        return in;
+        }
+};
+
+class hepatita:public vaccin{
+private:
+    char tip;
+    string modVaccinare;
+public:
+    hepatita(char tip,string modVaccinare){
+        this->tip=tip;
+        this->modVaccinare=modVaccinare;
+    }
+
+    hepatita(const hepatita &h){
+    this->tip=h.tip;
+    this->modVaccinare=h.modVaccinare;
+    }
+
+    hepatita& operator=(const hepatita& h){
+        if(this!=&h){
+    this->tip=h.tip;
+    this->modVaccinare=h.modVaccinare;
+    }
+    return *this;}
+
+    friend ostream& operator<<(ostream &out, const hepatita& h){
+        out<<h.tip;
+        out<<h.modVaccinare;
+        return out;}
+
+    friend istream& operator>>(istream &in, hepatita &h){
+        cout<<"\n Introduceti tipul vaccinului: [A,B,C]";
+        in>>h.tip;
+        cout<<"\nIntroduceti modul de vaccinare: [intramuscula, intradermic, subcutanat]";
+        in>>h.modVaccinare;
+        return in;
+        }
+};
+
+class sarsCov2:public vaccin{
+private:
+    string reactiiAdverse;
+    int rataEficienta;
+    string medContraindicate;
+public:
+    string getMedContraindicate(){ return medContraindicate; }
+
+    sarsCov2(string reactiiAdverse, int rataEficienta, string medContraindicate){
+        this->reactiiAdverse=reactiiAdverse;
+        this->rataEficienta=rataEficienta;
+        this->medContraindicate=medContraindicate;
+    }
+
+    sarsCov2(const sarsCov2 &s){
+        this->reactiiAdverse=s.reactiiAdverse;
+        this->rataEficienta=s.rataEficienta;
+        this->medContraindicate=s.medContraindicate;
+    }
+
+    sarsCov2& operator=(const sarsCov2& s){
+        if(this!=&s){
+        this->reactiiAdverse=s.reactiiAdverse;
+        this->rataEficienta=s.rataEficienta;
+        this->medContraindicate=s.medContraindicate;
+    }
+    return *this;}
+
+    friend ostream& operator<<(ostream &out, const sarsCov2& s){
+        out<<s.reactiiAdverse;
+        out<<s.rataEficienta;
+        out<<s.medContraindicate;
+        return out;}
+
+    friend istream& operator>>(istream &in, sarsCov2 &s){
+        cout<<"\n Introduceti reactia adversa: ";
+        in>>s.reactiiAdverse;
+        cout<<"\n Introduceti rata de eficienta: ";
+        in>>s.rataEficienta;
+        cout<<"\n Introduceti medicamentul contrindicat: ";
+        in>>s.medContraindicate;
+        return in;
+        }
+};
+
+class comanda{
+private:
+    const int id;
+    string data;
+    string numeClient;
+    string vaccinComandat;
+    int cantitate;
+    bool onorata;
+public:
+    string getVaccinComandat(){ return vaccinComandat;}
+    int getCantitate(){ return cantitate; }
+    
+        comanda(string data, string numeClient, string vaccinComandat, int cantitate, bool onorata):id(000){
+        this->data=data;
+        this->numeClient=numeClient;
+        this->vaccinComandat=vaccinComandat;
+        this->cantitate=cantitate;
+        this->onorata=onorata;
+    }
+
+    comanda(const comanda &c){
+        this->data=c.data;
+        this->numeClient=c.numeClient;
+        this->vaccinComandat=c.vaccinComandat;
+        this->cantitate=c.cantitate;
+        this->onorata=c.onorata;
+    }
+
+    comanda& operator=(const comanda& c){
+        if(this!=&c){
+        this->data=c.data;
+        this->numeClient=c.numeClient;
+        this->vaccinComandat=c.vaccinComandat;
+        this->cantitate=c.cantitate;
+        this->onorata=c.onorata;
+    }
+    return *this;}
+
+    friend ostream& operator<<(ostream &out, const comanda& c){
+        out<<c.data;
+        out<<c.numeClient;
+        out<<c.vaccinComandat;
+        out<<c.cantitate;
+        out<<c.onorata;
+        return out;}
+
+    friend istream& operator>>(istream &in, comanda &c){
+        cout<<"\n Introduceti data: ";
+        in>>c.data;
+        cout<<"\n Introduceti numele clientului: ";
+        in>>c.numeClient;
+        cout<<"\n Introduceti vaccin: ";
+        in>>c.vaccinComandat;
+        cout<<"\n Introduceti cantitatea: ";
+        in>>c.cantitate;
+        cout<<"\n Poate fi onorata? ";
+        in>>c.onorata;
+        return in;
+        }
+};
+
+int main()
+{
+antiGripal *a;
+hepatita *b;
+sarsCov2 *c;
+cin>>*a>>*b>>*c;
+cout<<a<<b<<c;
+
+vaccin* lista[3];
+/*lista[0]=new antiGripal;
+lista[1]=new hepatita;
+lista[2]=new sarsCov2;
+/*
+for(int i=0; i<3; i++)
+ list[i]-> afisareSchemaVaccinare();
+
+Comanda com1(“20-12-2020”, ”SpitalX”, ”AntiSarsCov2”,20);
+ListaComenzi lista;
+lista=lista+com1;
+cout<<lista[0]*/
+    return 0;
+}
