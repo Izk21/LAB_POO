@@ -214,7 +214,7 @@ public:
         this->onorata=onorata;
     }
 
-    comanda(const comanda& c){
+    comanda(const comanda& c):id(000){
         this->data=c.data;
         this->numeClient=c.numeClient;
         this->vaccinComandat=c.vaccinComandat;
